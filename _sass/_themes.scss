@@ -129,6 +129,10 @@ html[data-theme-setting="dark"] {
     color: var(--global-back-to-top-text-color);
     background: var(--global-back-to-top-bg-color);
   }
+
+  .invertable {
+    filter: hue-rotate(180deg) invert(1);
+  }
 }
 
 html[data-theme-setting="light"] {
