@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Project website for Jon Goikoetxea's Computer Science Bachelor's thesis."
+    />
+    <meta
+      property="og:title"
+      content="Learning efficient goal-conditioned policies by imitating optimal trajectories"
+    />
+    <meta
+      property="og:description"
+      content="Small neural networks can learn to control dynamical systems efficiently towards multiple goals."
+    />
+    <meta property="og:url" content="https://jongoiko.github.io/gcimopt/" />
+    <meta
+      name="keywords"
+      content="machine learning,imitation learning,control,optimal control,trajectory optimization"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+      integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"
+      integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"
+      integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
+
+    <title>
+      Learning efficient goal-conditioned policies by imitating optimal
+      trajectories
+    </title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="static/css/bulma.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="static/css/index.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body pb-1">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                Learning efficient goal-conditioned policies by imitating
+                optimal trajectories
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://jongoiko.github.io" target="_blank"
+                    >Jon Goikoetxea</a
+                  >,</span
+                >
+                <span class="author-block">
+                  <a
+                    href="https://www.unavarra.es/pdi/?uid=1715&languageId=1"
+                    target="_blank"
+                    >Jesús F. Palacián</a
+                  ><sup>*</sup></span
+                >
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"
+                  >Department of Statistics, Mathematics and Computer Science<br />Public
+                  University of Navarre (UPNA)</span
+                >
+                <span class="eql-cntrb"
+                  ><small
+                    ><br />Bachelor's Thesis (<em>Trabajo Fin de Grado</em>)
+                    <br /><sup>*</sup> Thesis director</small
+                  ></span
+                >
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/jongoiko/gcimopt"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/jongoiko/gcimopt"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-database"></i>
+                      </span>
+                      <span>Data and models</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video carousel -->
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item item-video1">
+              <video poster="" autoplay controls muted loop width="100%">
+                <source src="static/videos/cartpole.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="item item-video2">
+              <video poster="" autoplay controls muted loop width="100%">
+                <source src="static/videos/drone2d.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="item item-video3">
+              <video poster="" autoplay controls muted loop width="100%">
+                <source src="static/videos/drone3d.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="item item-video4">
+              <video poster="" autoplay controls muted loop width="100%">
+                <source src="static/videos/robot.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+          <div class="columns is-centered has-text-centered mt-3">
+            <div class="column is-four-fifths">
+              <div class="content has-text-justified">
+                <p class="subtitle">
+                  We train neural networks to control various systems
+                  efficiently towards arbitrary goals. In the videos above, pink
+                  markers (<span class="marker-color is-size-6">■</span>) denote
+                  goals passed as input to the neural networks.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End video carousel -->
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Imitation learning—learning to solve a task by imitating expert
+                demonstrations—is a well-established approach for
+                machine-learning-based control. However, its applicability
+                depends on having access to demonstrations, which are often
+                expensive to collect and/or suboptimal for solving the task. In
+                this work, we present an approach to train goal-conditioned
+                policies on datasets generated by trajectory optimization. Our
+                approach for dataset generation is computationally efficient,
+                can generate thousands of optimal trajectories in minutes on a
+                laptop computer, and produces high-quality demonstrations.
+                Further, by means of a data augmentation scheme that treats
+                intermediate states as goals, we are able to increase the
+                training dataset size by an order of magnitude. Using our
+                generated datasets, we train goal-conditioned neural network
+                policies that can control the system towards arbitrary goals. To
+                demonstrate the generality of our approach, we generate datasets
+                and then train policies for various control tasks, namely
+                cart-pole stabilization, planar and three-dimensional quadcopter
+                stabilization, and point reaching using a 6-DoF robot arm. We
+                show that our trained policies can achieve high success rates
+                and efficient control profiles, all while being small enough
+                (less than 80,000 neural network parameters) that they could be
+                deployed onboard resource-constrained controllers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
+
+    <section class="section hero pb-1">
+      <div class="container is-max-desktop">
+        <h3 class="title is-4">Optimal control</h3>
+        <div class="content has-text-justified">
+          <p>
+            How do we bring a spacecraft to the Moon while minimizing fuel
+            consumption? How do we make a robot arm reach an object in the
+            shortest possible time? How do we control a drone to fly from point
+            \(A\) to point \(B\) with the least energy expenditure?
+          </p>
+          <p>
+            These are all examples of <i>optimal control problems</i> (OCPs). We
+            have a dynamical system whose state evolves over time: \[
+            \dot{\bm{x}}(t) = \bm{f}(\bm{x}(t), \bm{u}(t)), \] where
+            \(\bm{x}(t)\) is the system's state at time \(t\) and \(\bm{u}(t)\)
+            is the control. We cannot change the state directly, but we do get
+            to pick the controls: these are, for instance, the forces of a
+            drone's motors. But what controls do we pick to accomplish our task?
+          </p>
+          <p>
+            Optimal control is about picking the
+            <i>best possible controls</i> according to a specific performance
+            measure. Suppose the system starts at state \(\bm{x}_0\) and that we
+            wish to control it to reach a goal state \(\bm{x}_g\) at time
+            \(t_f\). Since we are seeking an optimal control, we should specify
+            a performance measure or <i>cost functional</i>; this could take the
+            form \[ \int_{0}^{t_f} L(\bm{x}(t), \bm{u}(t)) \mathrm{d}t +
+            L_f(\bm{x}(t_f), t_f). \] Part of the cost is accumulated over time
+            (integrated), while we also may incur some cost at the end of the
+            trajectory; it all depends on what we define by a
+            <i>best</i> control, and our definition will determine the best
+            choice for \(L\) and \(L_f\).
+          </p>
+          <p>
+            We can then specify a full OCP, for example \[ \small \begin{align*}
+            \underset{\bm{u}(t), t_f}{\small\text{minimize}} & \int_{0}^{t_f}
+            L(\bm{x}(t), \bm{u}(t)) \mathrm{d}t + L_f(\bm{x}(t_f), t_f) \\
+            \small{\text{subject to}} \ & \dot{\bm{x}}(t) = \bm{f}(\bm{x}(t),
+            \bm{u}(t)), \\ & \bm{x}(0) = \bm{x}_0, \\ & \bm{x}(t_f) = \bm{x}_g.
+            \end{align*} \] For a fixed initial and goal state, we can solve
+            this problem by
+            <i>trajectory optimization</i>; nowadays we have very fast solvers
+            for this purpose [1]. By solving the problem, we obtain a control
+            \(\bm{u}(t)\) that minimizes the cost while satisfying the
+            constraints (of which there could be more).
+          </p>
+          <p>
+            The problem, however, is that we'd like a controller that can
+            control the system from any state; this is a
+            <i>closed-loop controller</i> or <i>policy</i>. In addition, we'd
+            like to be able to specify to the policy what goal it should aim to
+            reach; that is, the policy is <i>goal-conditioned</i>. How do we
+            obtain a goal-conditioned policy that is also efficient according to
+            our measure of cost?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hero pb-1">
+      <div class="container is-max-desktop">
+        <h3 class="title is-4">Our method</h3>
+        <div class="content has-text-justified">
+          <p>
+            We sample many initial state-goal state pairs and obtain their
+            corresponding optimal controls using trajectory optimization,
+            yielding a dataset of optimal trajectories; we can then take these
+            trajectories as <i>expert demonstrations</i> to train a model such
+            as a neural network. Given a state and goal, the model should
+            approximate (imitate) the actions of the expert controller; thus,
+            this is a form of <i>imitation learning</i>.
+          </p>
+          <figure class="image">
+            <img src="static/images/method.svg" />
+          </figure>
+          <p>
+            Having trained a policy on the dataset of optimal demonstrations, we
+            can proceed to evaluate it in simulation; to that end, we measure
+          </p>
+
+          <ul>
+            <li>
+              the policy's <i>success rate</i>, i.e. what percentage of the time
+              it is successfully able to reach its goal state; and
+            </li>
+            <li>
+              its <i>efficiency</i>, that is, the cost it has accumulated
+              according to our OCP's cost functional. The less cost it obtains
+              relative to the optimal solution, the better.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hero">
+      <div class="container is-max-desktop">
+        <h3 class="title is-4">Results and videos</h3>
+        <div class="content has-text-justified">
+          <p>
+            We test our method on 4 different dynamical systems: a cart-pole
+            system, a 2-dimensional (planar) quadrotor, a three-dimensional
+            quadrotor and the Franka Emika Panda robot arm. The first three are
+            based on the
+            <code>safe-control-gym</code> library [2].
+          </p>
+          <p>
+            In the table below we report the time spans of the dataset
+            generation step, measured on a laptop computer.
+          </p>
+          <table class="table is-narrow">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Number of trajectories</th>
+                <th>Dataset generation time (mm:ss)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cart-pole</td>
+                <td>20000</td>
+                <td>03:08</td>
+              </tr>
+              <tr>
+                <td>Planar quadrotor</td>
+                <td>20000</td>
+                <td>05:27</td>
+              </tr>
+              <tr>
+                <td>Three-dimensional quadrotor</td>
+                <td>20000</td>
+                <td>11:23</td>
+              </tr>
+              <tr>
+                <td>Robot arm reaching</td>
+                <td>20000</td>
+                <td>00:19</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            For all the aforementioned control tasks, we train neural network
+            policies that achieve success rates greater than 96%. The following
+            videos show trained neural network policies controlling each
+            dynamical system in simulation. We refer to the thesis report for
+            detailed quantitative evaluations.
+          </p>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <video
+              poster=""
+              id="tree"
+              autoplay
+              controls
+              muted
+              loop
+              height="100%"
+            >
+              <source
+                src="static/videos/results/cartpole.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+        <h2 class="subtitle has-text-centered mb-6 pb-4">
+          Example cart-pole trajectories in simulation using a 3-layer 64-unit
+          MLP policy running at 60Hz.
+          <span class="marker-color">Pink spheres</span> indicate goal cart-pole
+          positions.
+        </h2>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <video
+              poster=""
+              id="tree"
+              autoplay
+              controls
+              muted
+              loop
+              height="100%"
+            >
+              <source
+                src="static/videos/results/drone2d.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+        <h2 class="subtitle has-text-centered mb-6 pb-4">
+          Example planar quadrotor trajectories in simulation using a 3-layer
+          64-unit MLP policy running at 60Hz.
+          <span class="marker-color">Pink spheres</span> indicate goal quadrotor
+          positions.
+        </h2>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <video
+              poster=""
+              id="tree"
+              autoplay
+              controls
+              muted
+              loop
+              height="100%"
+            >
+              <source
+                src="static/videos/results/drone3d.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+        <h2 class="subtitle has-text-centered mb-6 pb-4">
+          Example three-dimensional quadrotor trajectories in simulation using a
+          5-layer 128-unit MLP policy running at 60Hz.
+          <span class="marker-color">Pink spheres</span> indicate goal quadrotor
+          positions.
+        </h2>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <video
+              poster=""
+              id="tree"
+              autoplay
+              controls
+              muted
+              loop
+              height="100%"
+            >
+              <source src="static/videos/results/robot.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <h2 class="subtitle has-text-centered mb-6 pb-6">
+          Example robot arm trajectories in simulation using a 3-layer 64-unit
+          MLP policy running at 50Hz.
+          <span class="marker-color">Pink spheres</span> indicate goal end
+          effector positions. We use the <code>panda-gym</code> library [3] for
+          the simulation.
+        </h2>
+      </div>
+      <div class="container is-max-desktop">
+        <div class="content has-text-justified">
+          <p>We extract the following conclusions from our work:</p>
+          <ul>
+            <li>
+              Small neural networks can represent goal-conditioned policies that
+              are efficient and achieve their goal with high success rates.
+            </li>
+            <li>
+              While a lower regression error sometimes corresponds to a better
+              performance of the policy, this is not always the case!
+            </li>
+            <li>
+              The three-dimensional quadrotor was the most challenging task, due
+              to the system's relatively high dimensionality and nonlinearity.
+            </li>
+          </ul>
+          <p>
+            Ideas for future research include evaluating the method on more
+            varied control tasks, handling partial observability and using
+            alternative policy representations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="references">
+      <div class="container is-max-desktop content">
+        <h2 class="title">References</h2>
+        <ol>
+          <li>
+            L. Vanroye, A. Sathya, J. De Schutter, and W. Decré, “FATROP: A fast
+            constrained optimal control problem solver for robot trajectory
+            optimization and control”, in 2023 IEEE/RSJ International Conference
+            on Intelligent Robots and Systems (IROS), IEEE, 2023, pp. 10 036–10
+            043.
+          </li>
+          <li>
+            Z. Yuan et al., “Safe-control-gym: A unified benchmark suite for
+            safe learning-based control and reinforcement learning in robotics”,
+            IEEE Robotics and Automation Letters, vol. 7, no. 4, pp. 11 142–11
+            149, 2022. doi: 10.1109/LRA.2022.3196132.
+          </li>
+          <li>
+            Q. Gallouedec et al., “panda-gym: Open-source goal-conditioned
+            environments for robotic learning”, arXiv preprint arXiv:2106.13687,
+            2021.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This page was built using the
+                <a
+                  href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank"
+                  >Academic Project Page Template</a
+                >
+                which was adopted from the <a
+                  href="https://nerfies.github.io"
+                  target="_blank"
+                  >Nerfies</a
+                > project page. You are free to borrow the source code of this
+                website, we just ask that you link back to this page in the
+                footer. <br />
+                This website is licensed under a
+                <a
+                  rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
