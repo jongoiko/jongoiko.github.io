@@ -1,0 +1,21 @@
+{% if site.enable_math %}
+  {% unless page.pseudocode %}
+    <script
+      defer
+      type="text/javascript"
+      id="KaTeX-script"
+      src="{{ site.third_party_libraries.katex.url.js }}"
+      integrity="{{ site.third_party_libraries.katex.integrity.js }}"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      type="text/javascript"
+      id="KaTeX-auto-render-script"
+      src="{{ site.third_party_libraries.katex.url.auto-render }}"
+      integrity="{{ site.third_party_libraries.katex.integrity.auto-render }}"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
+  {% endunless %}
+{% endif %}
