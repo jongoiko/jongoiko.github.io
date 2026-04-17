@@ -2,7 +2,7 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 
-.footer a {
+a {
   color: #359acc;
 }
 
@@ -77,10 +77,6 @@ body {
 
 .author-block {
   display: inline-block;
-}
-
-.author-block a {
-  color: #359acc;
 }
 
 code {

@@ -138,7 +138,7 @@
             <div class="column is-four-fifths">
               <div class="content has-text-justified">
                 <p class="subtitle">
-                  We train neural networks to control various systems efficiently towards arbitrary goals. In the videos above, pink markers (<span
+                  We train neural networks to control various systems near-optimally towards arbitrary goals. In the videos above, pink markers (<span
                     class="marker-color is-size-6"
                     >■</span
                   >) denote goals passed as input to the neural networks.
@@ -197,9 +197,8 @@
         <div class="content has-text-justified">
           <p>
             We sample many initial state-goal state pairs and obtain their corresponding optimal controls using trajectory optimization, yielding a
-            dataset of optimal trajectories; we can then take these trajectories as <i>expert demonstrations</i> to train a model such as a neural
-            network. Given a state and goal, the model should approximate (imitate) the actions of the expert controller; thus, this is a form of
-            <i>imitation learning</i>.
+            dataset of optimal trajectories; we can then take these trajectories as <i>expert demonstrations</i> to train a model.
+            We train neural networks on these demonstrations by behavior cloning, so that given the current state and goal, they approximate the optimal control.
           </p>
           <figure class="image">
             <img src="static/images/method.svg" />
@@ -261,9 +260,9 @@
             </tbody>
           </table>
           <p>
-            For all the aforementioned control tasks, we train neural network policies that achieve success rates greater than 96%. The following
-            videos show trained neural network policies controlling each dynamical system in simulation. We refer to the full paper for detailed
-            quantitative evaluations.
+            For all the aforementioned control tasks, we train neural network policies that achieve success rates greater than 97%.
+            Moreover, the inference time of our policies is 97 to 6278 times faster than that of the Fatrop [1] trajectory optimization solver, suggesting that GCImOpt policies could rival or surpass the control frequency of MPC controllers.
+            We refer to the full paper for detailed quantitative evaluations.
           </p>
         </div>
         <div class="columns is-centered">
@@ -316,14 +315,14 @@
         <div class="content has-text-justified">
           <p>We extract the following conclusions from our work:</p>
           <ul>
-            <li>Small neural networks can represent goal-conditioned policies that are efficient and achieve their goal with high success rates.</li>
+            <li>Small neural networks can represent goal-conditioned policies that are near-optimal and computationally efficient and can achieve their goal with high success rates.</li>
             <li>While a lower regression error sometimes corresponds to a better performance of the policy, this is not always the case!</li>
             <li>
               The three-dimensional quadrotor was the most challenging task, due to the system's relatively high dimensionality and nonlinearity.
             </li>
           </ul>
           <p>
-            Ideas for future research include evaluating the method on more varied control tasks, handling partial observability and using alternative
+            Ideas for future research include evaluating the method on more varied control tasks, handling sensor/actuator noise and partial observability and using alternative
             policy representations.
           </p>
         </div>
