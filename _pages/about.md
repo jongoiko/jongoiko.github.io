@@ -17,4 +17,4 @@ I am broadly interested in optimal and learning-based control, with special emph
 My research aims to make autonomous agents more generally capable and efficient by leveraging optimization and machine learning methods.
 
 Before coming to Grenoble, I obtained my BSc at the [Public University of Navarre](https://www.unavarra.es/home), where I worked with Prof. [Jesús Palacián](https://www.unavarra.es/pdi?uid=1715&languageId=1) on learning for control in robotics and astrodynamics.
-I also worked with the [UpnaLab](https://upnalab.com/) research team led by Prof. [Asier Marzo](https://www.unavarra.es/pdi?uid=8600), mostly on simulations for acoustic holography.
+I also worked with the [UpnaLab](https://upnalab.com/) research team led by Prof. [Asier Marzo](https://www.unavarra.es/pdi?uid=8600&languageId=1), mostly on simulations for acoustic holography.
