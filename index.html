@@ -1,6 +1,12 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <script>
+      (function() {
+        const saved = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+      })();
+    </script>
     <!-- Title -->
     <title>Jon Goikoetxea</title>
     <meta charset="utf-8" />
@@ -17,6 +23,7 @@
   </head>
 
   <body id="body">
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌓</button>
 
     <div id="main">
       <div id="intro">
@@ -66,4 +73,22 @@
 
     </div>
   </body>
+  <script>
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+      
+    function updateTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    updateTheme(root.getAttribute('data-theme') || 'light');
+
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      updateTheme(next);
+    });
+  </script>
 </html>

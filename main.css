@@ -3,7 +3,13 @@
   --text-color: #150c21;
   --link-color: #4f71b0;
   --muted-color: #a0a8b0;
-  --noise-opacity: 0.05;
+}
+
+:root[data-theme="dark"] {
+    --bg-color: #111115;
+    --text-color: #ece6f0;
+    --link-color: #6983b3;
+    --muted-color: #7a8290;
 }
 
 /* CSS Reset: http://meyerweb.com/eric/tools/css/reset */
@@ -257,4 +263,36 @@ h3 {
     padding-left: 0;
     text-align: left;
   }
+}
+
+#theme-toggle {
+  position: fixed;
+  top: 1.25em;
+  right: 1.25em;
+  z-index: 100;
+
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: none;
+
+  background-color: var(--bg-color);
+  box-shadow: 0 2px 8px var(--bg-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  line-height: 1;
+  cursor: pointer;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+#theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+#theme-toggle:active {
+  transform: translateY(0);
 }
