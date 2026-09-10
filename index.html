@@ -3,8 +3,13 @@
   <head>
     <script>
       (function() {
-        const saved = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        // If a theme is saved, we use it; otherwise, we default to the user's preferred theme
+        var theme = localStorage.getItem('theme');
+        if (!theme) {
+          const darkModeMql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+          theme = darkModeMql && darkModeMql.matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
     <!-- Title -->
