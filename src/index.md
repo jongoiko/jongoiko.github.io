@@ -1,9 +1,9 @@
 ---
 title: Jon Goikoetxea
-layout: 'layouts/home.html'
+layout: "layouts/home.html"
 intro:
-    image: images/profile.jpg
-    imageAlt: Portrait picture of Jon
+  image: images/profile.jpg
+  imageAlt: Portrait picture of Jon
 ---
 {% block description %}
 

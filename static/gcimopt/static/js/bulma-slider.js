@@ -1,5 +1,6 @@
 (function webpackUniversalModuleDefinition(root, factory) {
-  if (typeof exports === "object" && typeof module === "object") module.exports = factory();
+  if (typeof exports === "object" && typeof module === "object")
+    module.exports = factory();
   else if (typeof define === "function" && define.amd) define([], factory);
   else if (typeof exports === "object") exports["bulmaSlider"] = factory();
   else root["bulmaSlider"] = factory();
@@ -26,7 +27,12 @@
       });
       /******/
       /******/ // Execute the module function
-      /******/ modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+      /******/ modules[moduleId].call(
+        module.exports,
+        module,
+        module.exports,
+        __webpack_require__,
+      );
       /******/
       /******/ // Flag the module as loaded
       /******/ module.l = true;
@@ -89,11 +95,18 @@
       /* 0 */
       /***/ function (module, __webpack_exports__, __webpack_require__) {
         "use strict";
-        Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-        /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function () {
-          return isString;
+        Object.defineProperty(__webpack_exports__, "__esModule", {
+          value: true,
         });
-        /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
+        /* harmony export (binding) */ __webpack_require__.d(
+          __webpack_exports__,
+          "isString",
+          function () {
+            return isString;
+          },
+        );
+        /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ =
+          __webpack_require__(1);
         var _extends =
           Object.assign ||
           function (target) {
@@ -131,7 +144,12 @@
                 return typeof obj;
               }
             : function (obj) {
-                return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+                return obj &&
+                  typeof Symbol === "function" &&
+                  obj.constructor === Symbol &&
+                  obj !== Symbol.prototype
+                  ? "symbol"
+                  : typeof obj;
               };
 
         function _classCallCheck(instance, Constructor) {
@@ -142,26 +160,47 @@
 
         function _possibleConstructorReturn(self, call) {
           if (!self) {
-            throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            throw new ReferenceError(
+              "this hasn't been initialised - super() hasn't been called",
+            );
           }
-          return call && (typeof call === "object" || typeof call === "function") ? call : self;
+          return call &&
+            (typeof call === "object" || typeof call === "function")
+            ? call
+            : self;
         }
 
         function _inherits(subClass, superClass) {
           if (typeof superClass !== "function" && superClass !== null) {
-            throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+            throw new TypeError(
+              "Super expression must either be null or a function, not " +
+                typeof superClass,
+            );
           }
-          subClass.prototype = Object.create(superClass && superClass.prototype, {
-            constructor: { value: subClass, enumerable: false, writable: true, configurable: true },
-          });
-          if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : (subClass.__proto__ = superClass);
+          subClass.prototype = Object.create(
+            superClass && superClass.prototype,
+            {
+              constructor: {
+                value: subClass,
+                enumerable: false,
+                writable: true,
+                configurable: true,
+              },
+            },
+          );
+          if (superClass)
+            Object.setPrototypeOf
+              ? Object.setPrototypeOf(subClass, superClass)
+              : (subClass.__proto__ = superClass);
         }
 
         var isString = function isString(unknown) {
           return (
             typeof unknown === "string" ||
             (!!unknown &&
-              (typeof unknown === "undefined" ? "undefined" : _typeof(unknown)) === "object" &&
+              (typeof unknown === "undefined"
+                ? "undefined"
+                : _typeof(unknown)) === "object" &&
               Object.prototype.toString.call(unknown) === "[object String]")
           );
         };
@@ -170,16 +209,29 @@
           _inherits(bulmaSlider, _EventEmitter);
 
           function bulmaSlider(selector) {
-            var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var options =
+              arguments.length > 1 && arguments[1] !== undefined
+                ? arguments[1]
+                : {};
 
             _classCallCheck(this, bulmaSlider);
 
-            var _this = _possibleConstructorReturn(this, (bulmaSlider.__proto__ || Object.getPrototypeOf(bulmaSlider)).call(this));
+            var _this = _possibleConstructorReturn(
+              this,
+              (
+                bulmaSlider.__proto__ || Object.getPrototypeOf(bulmaSlider)
+              ).call(this),
+            );
 
-            _this.element = typeof selector === "string" ? document.querySelector(selector) : selector;
+            _this.element =
+              typeof selector === "string"
+                ? document.querySelector(selector)
+                : selector;
             // An invalid selector or non-DOM node has been provided.
             if (!_this.element) {
-              throw new Error("An invalid selector or non-DOM node has been provided.");
+              throw new Error(
+                "An invalid selector or non-DOM node has been provided.",
+              );
             }
 
             _this._clickEvents = ["click"];
@@ -210,7 +262,10 @@
                  * @return {void}
                  */
                 value: function init() {
-                  this._id = "bulmaSlider" + new Date().getTime() + Math.floor(Math.random() * Math.floor(9999));
+                  this._id =
+                    "bulmaSlider" +
+                    new Date().getTime() +
+                    Math.floor(Math.random() * Math.floor(9999));
                   this.output = this._findOutputForSlider();
 
                   this._bindEvents();
@@ -253,7 +308,10 @@
 
                   var style = window.getComputedStyle(this.element, null);
                   // Measure width of range input
-                  var sliderWidth = parseInt(style.getPropertyValue("width"), 10);
+                  var sliderWidth = parseInt(
+                    style.getPropertyValue("width"),
+                    10,
+                  );
 
                   // Figure out placement percentage between left and right of input
                   if (!this.element.getAttribute("min")) {
@@ -261,7 +319,9 @@
                   } else {
                     minValue = this.element.getAttribute("min");
                   }
-                  var newPoint = (this.element.value - minValue) / (this.element.getAttribute("max") - minValue);
+                  var newPoint =
+                    (this.element.value - minValue) /
+                    (this.element.getAttribute("max") - minValue);
 
                   // Prevent bubble from going beyond left or right (unsupported browsers)
                   if (newPoint < 0) {
@@ -288,7 +348,11 @@
                 value: function _bindEvents() {
                   if (this.output) {
                     // Add event listener to update output when slider value change
-                    this.element.addEventListener("input", this.onSliderInput, false);
+                    this.element.addEventListener(
+                      "input",
+                      this.onSliderInput,
+                      false,
+                    );
                   }
                 },
               },
@@ -306,8 +370,12 @@
                   }
 
                   // Check for prefix and postfix
-                  var prefix = this.output.hasAttribute("data-prefix") ? this.output.getAttribute("data-prefix") : "";
-                  var postfix = this.output.hasAttribute("data-postfix") ? this.output.getAttribute("data-postfix") : "";
+                  var prefix = this.output.hasAttribute("data-prefix")
+                    ? this.output.getAttribute("data-prefix")
+                    : "";
+                  var postfix = this.output.hasAttribute("data-postfix")
+                    ? this.output.getAttribute("data-postfix")
+                    : "";
 
                   // Update output with slider value
                   this.output.value = prefix + this.element.value + postfix;
@@ -322,14 +390,26 @@
                 value: function attach() {
                   var _this3 = this;
 
-                  var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'input[type="range"].slider';
-                  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+                  var selector =
+                    arguments.length > 0 && arguments[0] !== undefined
+                      ? arguments[0]
+                      : 'input[type="range"].slider';
+                  var options =
+                    arguments.length > 1 && arguments[1] !== undefined
+                      ? arguments[1]
+                      : {};
 
                   var instances = new Array();
 
-                  var elements = isString(selector) ? document.querySelectorAll(selector) : Array.isArray(selector) ? selector : [selector];
+                  var elements = isString(selector)
+                    ? document.querySelectorAll(selector)
+                    : Array.isArray(selector)
+                      ? selector
+                      : [selector];
                   elements.forEach(function (element) {
-                    if (typeof element[_this3.constructor.name] === "undefined") {
+                    if (
+                      typeof element[_this3.constructor.name] === "undefined"
+                    ) {
                       var instance = new bulmaSlider(element, options);
                       element[_this3.constructor.name] = instance;
                       instances.push(instance);
@@ -341,13 +421,14 @@
                   return instances;
                 },
               },
-            ]
+            ],
           );
 
           return bulmaSlider;
         })(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
 
-        /* harmony default export */ __webpack_exports__["default"] = bulmaSlider;
+        /* harmony default export */ __webpack_exports__["default"] =
+          bulmaSlider;
 
         /***/
       },
@@ -379,7 +460,10 @@
 
         var EventEmitter = (function () {
           function EventEmitter() {
-            var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+            var listeners =
+              arguments.length > 0 && arguments[0] !== undefined
+                ? arguments[0]
+                : [];
 
             _classCallCheck(this, EventEmitter);
 
@@ -404,8 +488,14 @@
               value: function removeListeners() {
                 var _this = this;
 
-                var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-                var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+                var eventName =
+                  arguments.length > 0 && arguments[0] !== undefined
+                    ? arguments[0]
+                    : null;
+                var middleware =
+                  arguments.length > 1 && arguments[1] !== undefined
+                    ? arguments[1]
+                    : false;
 
                 if (eventName !== null) {
                   if (Array.isArray(eventName)) {
@@ -447,7 +537,10 @@
               value: function removeMiddleware() {
                 var _this3 = this;
 
-                var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+                var eventName =
+                  arguments.length > 0 && arguments[0] !== undefined
+                    ? arguments[0]
+                    : null;
 
                 if (eventName !== null) {
                   if (Array.isArray(eventName)) {
@@ -467,7 +560,10 @@
               value: function on(name, callback) {
                 var _this4 = this;
 
-                var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+                var once =
+                  arguments.length > 2 && arguments[2] !== undefined
+                    ? arguments[2]
+                    : false;
 
                 if (Array.isArray(name)) {
                   name.forEach(function (e) {
@@ -486,7 +582,9 @@
                       this._listeners.set(name, []);
                     }
 
-                    this._listeners.get(name).push({ once: once, callback: callback });
+                    this._listeners
+                      .get(name)
+                      .push({ once: once, callback: callback });
                   }
                 }
               },
@@ -502,7 +600,10 @@
               value: function emit(name, data) {
                 var _this5 = this;
 
-                var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+                var silent =
+                  arguments.length > 2 && arguments[2] !== undefined
+                    ? arguments[2]
+                    : false;
 
                 name = name.toString();
                 var listeners = this._listeners.get(name);
@@ -521,14 +622,18 @@
                           middleware(
                             data,
                             function () {
-                              var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+                              var newData =
+                                arguments.length > 0 &&
+                                arguments[0] !== undefined
+                                  ? arguments[0]
+                                  : null;
 
                               if (newData !== null) {
                                 data = newData;
                               }
                               doneCount++;
                             },
-                            name
+                            name,
                           );
                         });
 
@@ -566,6 +671,6 @@
         /***/
       },
       /******/
-    ]
+    ],
   )["default"];
 });

@@ -8,7 +8,8 @@
     "start": "eleventy --serve",
     "build": "eleventy",
     "production": "NODE_ENV=production npm run build",
-    "build-ghpages":  "NODE_ENV=production npm run build"
+    "build-ghpages": "NODE_ENV=production npm run build",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -30,5 +31,17 @@
     "npm-check-updates": "^23.1.0",
     "postcss": "^8.5.28",
     "sass": "^1.105.1"
+  },
+  "devDependencies": {
+    "globals": "^17.13.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "3.9.9"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.{md,json,yml,yaml}": "prettier --write"
   }
 }
