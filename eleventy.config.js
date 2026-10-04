@@ -15,6 +15,7 @@ export default function (eleventyConfig) {
   eleventyConfig.setInputDirectory("src");
   eleventyConfig.addPassthroughCopy("src/fonts");
   eleventyConfig.addPassthroughCopy({ static: "/" });
+  eleventyConfig.addPassthroughCopy("src/images/favicon.ico");
   eleventyConfig.addPlugin(RenderPlugin);
   eleventyConfig.addExtension("scss", {
     outputFileExtension: "css",
