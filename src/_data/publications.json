@@ -5,6 +5,7 @@
       "authors": ["Jon Goikoetxea", "Jesús F. Palacián"],
       "venue": "Learning for Dynamics and Control (L4DC) 2026",
       "image": "./images/gcimopt.gif",
+      "image_alt": "Animated GIF of GCImOpt policies controlling various dynamical systems",
       "website": "https://jongoiko.github.io/gcimopt/",
       "pdf": "https://raw.githubusercontent.com/mlresearch/v331/main/assets/goikoetxea26a/goikoetxea26a.pdf"
     }
