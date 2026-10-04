@@ -1,0 +1,20 @@
+<div class="list-item publication" data-category="publication">
+  <a target="_blank" rel="noopener noreferrer" href="{{ publication.website }}" class="thumbnail">
+    <img src="{{ publication.image }}" width="180px" alt="alt" />
+  </a>
+  <div class="project-description">
+    <h3><a target="_blank" rel="noopener noreferrer" href="{{ publication.website }}">{{ publication.title }}</a></h3>
+    <p>
+    {% for author in publication.authors %}
+      {% if author == 'Jon Goikoetxea' %}<b>Jon Goikoetxea</b>{% else %}{{ author }}{% endif %}{% if not loop.last %},{% endif %}
+    {% endfor  %}
+    <br>
+        <i>{{ publication.venue }}</i><br>
+        <span>
+        <a target="_blank" rel="noopener noreferrer" href="{{ publication.website }}">Webpage</a>
+        -
+        <a target="_blank" rel="noopener noreferrer" href="{{ publication.pdf }}">PDF</a>
+        </span>
+    </p>
+  </div>
+</div>

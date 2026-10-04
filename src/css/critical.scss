@@ -154,6 +154,15 @@ h2 {
   margin-right: 2%;
 }
 
+.project-description {
+  width: 82%;
+}
+
+.project-description a {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .thumbnail:hover {
   border-bottom: none;
 }
@@ -162,7 +171,7 @@ h2 {
   margin-top: 0.4em;
   border-radius: 5px;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 h3 {

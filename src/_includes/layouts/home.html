@@ -20,20 +20,10 @@
   <p class="note">
     For an up-to-date list, visit my <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.es/citations?user=TrORIA4AAAAJ&hl=en&oi=ao">Google Scholar</a>.
   </p>
-    <div class="list-item publication" data-category="publication">
-      <a target="_blank" rel="noopener noreferrer" href="https://jongoiko.github.io/gcimopt/" class="thumbnail">
-        <img src="./images/gcimopt.gif" width="180px" alt="alt" />
-      </a>
-      <div class="project-description">
-        <h3><a target="_blank" rel="noopener noreferrer" href="https://jongoiko.github.io/gcimopt/">GCImOpt: Learning efficient goal-conditioned policies by imitating optimal trajectories</a></h3>
-        <p>
-          Jon Goikoetxea, Jesús F. Palacián<br>
-            <i>Learning for Dynamics and Control (L4DC) 2026</i><br>
-            <a target="_blank" rel="noopener noreferrer" href="https://jongoiko.github.io/gcimopt/">Webpage</a>
-            <a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/mlresearch/v331/main/assets/goikoetxea26a/goikoetxea26a.pdf">PDF</a>
-        </p>
-      </div>
-    </div>
+	{% for pub in publications.items %}
+    {% set publication = pub %}
+    {% include "partials/publication.html" %}
+	{% endfor %}
 </div>
 
 <div id="footer">

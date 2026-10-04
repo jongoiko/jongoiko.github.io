@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "title": "GCImOpt: Learning efficient goal-conditioned policies by imitating optimal trajectories",
+      "authors": ["Jon Goikoetxea", "Jesús F. Palacián"],
+      "venue": "Learning for Dynamics and Control (L4DC) 2026",
+      "image": "./images/gcimopt.gif",
+      "website": "https://jongoiko.github.io/gcimopt/",
+      "pdf": "https://raw.githubusercontent.com/mlresearch/v331/main/assets/goikoetxea26a/goikoetxea26a.pdf"
+    }
+  ]
+}
