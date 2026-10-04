@@ -67,7 +67,6 @@ export default function (eleventyConfig) {
   }
   let markdownLibrary = markdownIt({
     html: true,
-    breaks: true,
   })
     .use(mdIterator, "url_new_win", "link_open", function (tokens, idx) {
       const [, href] = tokens[idx].attrs.find((attr) => attr[0] === "href");
