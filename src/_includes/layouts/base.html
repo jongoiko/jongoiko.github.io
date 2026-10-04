@@ -1,0 +1,74 @@
+{% set assetHash = global.random() %}
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script>
+      (function() {
+        // If a theme is saved, we use it; otherwise, we default to the user's preferred theme
+        var theme = localStorage.getItem('theme');
+        if (!theme) {
+          const darkModeMql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+          theme = darkModeMql && darkModeMql.matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+    <!-- Title -->
+    <title>{{ title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Custom Style -->
+    <style>{% renderFile "./src/css/critical.scss" %}</style>
+    
+    {# Add facility for pages to declare an array of critical styles #}
+    {% if pageCriticalStyles %}
+    	{% for item in pageCriticalStyles %}
+    		<style>{% renderFile "./src/css/" + item %}</style>
+    	{% endfor %}
+    {% endif %}
+    <link rel="stylesheet" media="print" href="/fonts/fonts.css?{{ assetHash }}" onload="this.media='all'" />
+
+    {# Add facility for pages to declare an array of stylesheet paths #}
+    {% if pageStylesheets %}
+    	{% for item in pageStylesheets %}
+    		<link rel="stylesheet" media="print" href="{{ ("./src/css/" + item) | inputPathToUrl }}?{{ assetHash }}" onload="this.media='all'" />
+    	{% endfor %}
+    {% endif %}
+
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  </head>
+
+  <body id="body">
+    <button id="theme-toggle" aria-label="Toggle dark mode">
+      <svg id="icon-moon" width="0.8em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="currentColor" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776"/></svg>
+      <svg id="icon-sun" width="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="currentColor" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2zm5.121-8.707s1.414 1.414 0 2.828-2.828 0-2.828 0L4.878 8.708s-1.414-1.414 0-2.829c1.415-1.414 2.829 0 2.829 0zm21 21s1.414 1.414 0 2.828-2.828 0-2.828 0l-1.414-1.414s-1.414-1.414 0-2.828 2.828 0 2.828 0zm-.413-18.172s-1.414 1.414-2.828 0 0-2.828 0-2.828l1.414-1.414s1.414-1.414 2.828 0 0 2.828 0 2.828zm-21 21s-1.414 1.414-2.828 0 0-2.828 0-2.828l1.414-1.414s1.414-1.414 2.828 0 0 2.828 0 2.828zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2z"/><circle cx="18" cy="18" r="10" fill="currentColor"/></svg>
+    </button>
+    <div id="main">
+        {% block content %}{% endblock %}
+    </div>
+  </body>
+  <script>
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+
+    function updateTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
+
+    updateTheme(root.getAttribute('data-theme') || 'light');
+
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      updateTheme(next);
+    });
+  </script>
+</html>

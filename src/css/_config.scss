@@ -1,0 +1,20 @@
+@use "sass:map";
+
+$font-base-size: 1rem;
+
+$font: 'Asap', roboto, sans-serif;
+
+$font-size-scale: (
+  '300': $font-base-size * 0.75,
+  '400': $font-base-size,
+  '500': $font-base-size * 1.33,
+  '600': $font-base-size * 1.77,
+  '700': $font-base-size * 2.36,
+  '800': $font-base-size * 3.15,
+  '900': $font-base-size * 4.2,
+  'major': $font-base-size * 5.6,
+);
+
+@function get-size($key) {
+  @return map.get($font-size-scale, $key);
+}
