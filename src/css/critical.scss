@@ -11,13 +11,15 @@
   --text-color: #150c21;
   --link-color: #4f71b0;
   --muted-color: #8c9298;
+  --img-filter-invert: 0;
 }
 
 :root[data-theme="dark"] {
-    --bg-color: #111115;
-    --text-color: #ece6f0;
-    --link-color: #6b8dcb;
-    --muted-color: #7a8290;
+  --bg-color: #111115;
+  --text-color: #ece6f0;
+  --link-color: #6b8dcb;
+  --muted-color: #7a8290;
+  --img-filter-invert: 1;
 }
 
 #body {
@@ -166,7 +168,7 @@ h2 {
 }
 
 .project-description {
-  width: 82%;
+  width: 100%;
 }
 
 .project-description a {
@@ -217,6 +219,11 @@ h3 {
   padding-right: inherit;
   font-size: 0.85em;
   color: var(--muted-color);
+}
+
+img.invert {
+  filter: invert(var(--img-filter-invert));
+  transition: 300ms ease;
 }
 
 

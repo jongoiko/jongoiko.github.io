@@ -1,0 +1,10 @@
+<div class="list-item publication" data-category="project">
+  <a target="_blank" rel="noopener noreferrer" href="{{ project.website }}" class="thumbnail">
+    <img src="{{ project.image }}" width="180px" alt="{{ project.image_alt }}" {% if project.image_invert %}class="invert"{% endif %}/>
+  </a>
+  <div class="project-description">
+    <h3><a target="_blank" rel="noopener noreferrer" href="{{ project.website }}">{{ project.title }}</a></h3>
+    <p>
+      {{ project.description | safe }}
+  </div>
+</div>

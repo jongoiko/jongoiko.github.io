@@ -27,6 +27,17 @@
 	{% endfor %}
 </div>
 
+<div class="section">
+  <h2>Projects:</h2>
+  <p class="note">
+    See more on my <a target="_blank" rel="noopener noreferrer" href="https://github.com/jongoiko">GitHub page</a>.
+  </p>
+	{% for proj in projects.items %}
+    {% set project = proj %}
+    {% include "partials/project.html" %}
+	{% endfor %}
+</div>
+
 <div id="footer">
   <p>
   Site built with <a href="https://www.11ty.dev/" target="_blank" rel="noopener noreferrer">Eleventy</a>. Thanks to <a href="https://andyzeng.github.io/" target="_blank" rel="noopener noreferrer">Andy Zeng</a> for the website template.
