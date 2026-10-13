@@ -1,6 +1,7 @@
 ---
 title: Jon Goikoetxea
 layout: "layouts/home.html"
+date: Last Modified
 intro:
   image: images/profile.jpg
   imageAlt: Portrait picture of Jon
