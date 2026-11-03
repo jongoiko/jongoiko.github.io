@@ -1,5 +1,6 @@
 ---
 title: Jon Goikoetxea
+description: Hi! I'm an Artificial Intelligence MSc student at Ensimag - INP Grenoble, working on robot learning.
 layout: "layouts/home.html"
 date: Last Modified
 intro:
